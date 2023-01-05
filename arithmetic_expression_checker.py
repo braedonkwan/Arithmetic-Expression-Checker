@@ -18,6 +18,7 @@ NUM = '5'           # ([0-9]+)|([0-9]+\.[0-9]+)|pi
 
 # converts the input into a stream of tokens
 def scanner(input):
+    # used to tokenize and differentiate the unary minus and subtraction operator
     def tokenize_unary_minus(input):
         i = 0
         input = list(input)
