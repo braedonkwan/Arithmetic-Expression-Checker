@@ -8,7 +8,7 @@ LP = '3'            # \(
 RP = '4'            # \)
 NUM = '5'           # ([0-9]+)|([0-9]+\.[0-9]+)|pi
 
-# BNF grammar for arithmetic expressions
+# context-free grammar for arithmetic expressions
 # <expr> ::= <unit> <expr_tail>
 # <expr_tail> ::= BINARY_OP <unit> <expr_tail> | EOF
 # <unit> ::= UNARY_MINUS <unit_tail> | <unit_tail>
@@ -17,7 +17,7 @@ NUM = '5'           # ([0-9]+)|([0-9]+\.[0-9]+)|pi
 
 
 # converts the input into a stream of tokens
-def scanner(input):
+def tokenizer(input):
     # used to tokenize and differentiate the unary minus and subtraction operator
     def tokenize_unary_minus(input):
         i = 0
@@ -40,7 +40,7 @@ def scanner(input):
     return input
 
 
-# returns True if the input is a valid arithmetic expression
+# returns True if the token stream adheres to the grammar rules
 def parser(input):
     def expr(input):
         input = unit(input)
@@ -78,7 +78,7 @@ def parser(input):
                 input = input[1:]
         return input
 
-    input = scanner(input)
+    input = tokenizer(input)
     input = expr(input)
     if len(input) == 0:
         return True
